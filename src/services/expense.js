@@ -11,6 +11,30 @@ const getAllExpenseData = createAsyncThunk(`get/expenses`, async() => {
 });
 
 
+
+// get all expense-users list
+const getExpenseUsers = createAsyncThunk(`get/expenses/users`, async() => {
+    const response = await axios.get(`${baseUrl}/expense/api/users/`);
+    return response.data;
+});
+
+// add new expense service
+const addNewExpense = createAsyncThunk('add/expense', async(expensePayload) => {
+
+    const  response = await axios.post(`${baseUrl}/expense/api/expense/add/`,expensePayload, {
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    } )
+
+    return response.data;
+})
+
+// # api services
+
 export{
-    getAllExpenseData,
+    addNewExpense,      // add new expense 
+    getExpenseUsers,    // get expense users
+    getAllExpenseData, // get all expenses
+
 }

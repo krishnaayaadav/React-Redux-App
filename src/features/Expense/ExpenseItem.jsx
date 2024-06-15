@@ -1,11 +1,12 @@
 
 const ExpenseItem = (props)=> {
+    const key = props.expense.id;
     const expense = props.expense;
 
     return(
 
         <tr >
-            <th scope="row">{expense.id} </th>
+            <th scope="row" key={key}>{expense.id} </th>
             <td>{expense.exp_title} </td>
             <td>{expense.exp_user} </td>
             <td>{expense.exp_amount} </td>
