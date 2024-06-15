@@ -57,7 +57,7 @@ const ExpenseList = ()=> {
                 <tbody>
                     {
                         expenseItems.map( expense => (
-                            <ExpenseItem  expense={expense} />
+                            <ExpenseItem key={expense.id}  expense={expense} />
                         ) )
                     }
                     

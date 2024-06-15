@@ -3,6 +3,7 @@ import {  createAsyncThunk } from "@reduxjs/toolkit";
 
 const baseUrl = 'http://127.0.0.1:8000';
 
+// Expense Api Services: add-expense, get-all-expense, update-expense, or delete-expense
 
 // get all expense data
 const getAllExpenseData = createAsyncThunk(`get/expenses`, async() => {
@@ -18,6 +19,7 @@ const getExpenseUsers = createAsyncThunk(`get/expenses/users`, async() => {
     return response.data;
 });
 
+
 // add new expense service
 const addNewExpense = createAsyncThunk('add/expense', async(expensePayload) => {
 
@@ -30,10 +32,21 @@ const addNewExpense = createAsyncThunk('add/expense', async(expensePayload) => {
     return response.data;
 })
 
-// # api services
+//  delete expense 
+const deleteExpense = createAsyncThunk('delete/expense', async(expenseId) => {
+
+    const response = await axios.delete(`${baseUrl}/expense/api/expense/delete/${expenseId}/`,{}, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return response.data;
+})
 
 export{
-    addNewExpense,      // add new expense 
+    deleteExpense,        // delete expense
+    addNewExpense,       // add new expense 
     getExpenseUsers,    // get expense users
     getAllExpenseData, // get all expenses
 

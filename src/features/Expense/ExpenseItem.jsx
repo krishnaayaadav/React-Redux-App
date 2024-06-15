@@ -1,12 +1,29 @@
 
-const ExpenseItem = (props)=> {
-    const key = props.expense.id;
-    const expense = props.expense;
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+
+import { deleteExpense } from "../../services/expense";
+
+const ExpenseItem   = (props)=> {
+    const expense   = props.expense;
+    const dispatch  = useDispatch();
+
+
+
+
+    const expenseDeleteHandler = (event,expId)=>{
+        event.preventDefault();
+
+        dispatch(deleteExpense(expId))
+
+
+    }
+
 
     return(
 
-        <tr >
-            <th scope="row" key={key}>{expense.id} </th>
+        <tr  >
+            <th scope="row" >{expense.id} </th>
             <td>{expense.exp_title} </td>
             <td>{expense.exp_user} </td>
             <td>{expense.exp_amount} </td>
@@ -14,7 +31,7 @@ const ExpenseItem = (props)=> {
             <td> {expense.exp_description} </td>
             <td>
                 <button className="btn btn-sm btn-primary my-3">Update</button>
-                <button className="btn btn-sm btn-danger">Delete</button>
+                <button className="btn btn-sm btn-danger" onClick={(e) => {expenseDeleteHandler(e,expense.id)}}>Delete</button>
 
             </td>
 

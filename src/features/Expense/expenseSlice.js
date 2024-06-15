@@ -1,8 +1,8 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllExpenseData, addNewExpense } from "../../services/expense";
+import { getAllExpenseData, addNewExpense, deleteExpense } from "../../services/expense";
 
-
+// # initialState
 const expenseInitialState = {
     expenseItems: [],
     isError: null,
@@ -12,6 +12,7 @@ const expenseInitialState = {
     message: ''
 }
 
+// expense slice 
 const expenseSlice = createSlice({
 
     name: 'expense',
@@ -30,6 +31,7 @@ const expenseSlice = createSlice({
             state.isSuccess = true;
             state.expenseItems = action.payload;
             state.status = 'loaded';
+
 
         })
 
@@ -55,6 +57,19 @@ const expenseSlice = createSlice({
             state.isError= action.error.message;
 
         })
+
+        // delete expense state updation
+        .addCase(deleteExpense.fulfilled, (state, action) => {
+            
+            const deleteExpId = action.meta.arg
+            state.message     = `Congrats! Expense Deleted Successully Id: ${deleteExpId}`;
+            // update expense data here
+            state.expenseItems =  state.expenseItems.filter(expense => expense.id != deleteExpId)
+
+        })
+
+        
+
     }
 })
 
