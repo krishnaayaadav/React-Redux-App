@@ -10,8 +10,8 @@ const store = configureStore({
     // reducers
     reducer: {
 
-        expense: expenseReducer,
-        expenseUser: expenseUserReducer
+        expense:     expenseReducer,
+        expenseUser: expenseUserReducer,
 
     }
 });

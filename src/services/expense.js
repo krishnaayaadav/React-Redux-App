@@ -44,10 +44,32 @@ const deleteExpense = createAsyncThunk('delete/expense', async(expenseId) => {
     return response.data;
 })
 
+// expense details
+const getExpenseDetails = (expId) => {
+
+    const response =  axios.get(`${baseUrl}/expense/api/expense/details/${expId}`, );
+    return response;
+
+}
+
+// update expense items
+const updateExpense = (payLoad) => {
+
+    const response =  axios.patch(`${baseUrl}/expense/api/expense/update/${payLoad.id}/`, payLoad, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    return response
+}
 export{
-    deleteExpense,        // delete expense
-    addNewExpense,       // add new expense 
+    deleteExpense,         // delete expense
+    addNewExpense,        // add new expense 
+    updateExpense,       // update expense 
     getExpenseUsers,    // get expense users
     getAllExpenseData, // get all expenses
+    getExpenseDetails, // get expense details
+
 
 }

@@ -25,7 +25,7 @@ const ExpenseList = ()=> {
         }
 
 
-    },[status, userStatus])
+    },[status, userStatus, message])
 
     return(
         <>

@@ -1,6 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllExpenseData, addNewExpense, deleteExpense } from "../../services/expense";
+import { getAllExpenseData, addNewExpense, deleteExpense, getExpenseDetails, updateExpense } from "../../services/expense";
 
 // # initialState
 const expenseInitialState = {
@@ -9,7 +9,7 @@ const expenseInitialState = {
     isSuccess: null,
     isLoading: null,
     status: 'idle',
-    message: ''
+    message: '',
 }
 
 // expense slice 
@@ -18,6 +18,21 @@ const expenseSlice = createSlice({
     name: 'expense',
     initialState: expenseInitialState,
 
+    reducers: {
+
+        updateExpenseItem: (state, action)=> {
+            //  find index of updated element
+            const index = state.expenseItems.findIndex(exp =>  exp.id === action.payload.id);
+
+            // update the expense item with updated data
+            state.expenseItems[index] = action.payload;
+            state.message = `Expense updated successfully\n Title: ${action.payload.exp_title}`
+
+            
+        }
+
+    },
+    // Extra-Reducers here
     extraReducers: (builder) => {
 
         // get all expenses
@@ -68,9 +83,8 @@ const expenseSlice = createSlice({
 
         })
 
-        
-
     }
 })
 
+export const  { updateExpenseItem } =  expenseSlice.actions;
 export default expenseSlice.reducer;

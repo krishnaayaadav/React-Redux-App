@@ -1,12 +1,17 @@
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { deleteExpense } from "../../services/expense";
+
 
 const ExpenseItem   = (props)=> {
     const expense   = props.expense;
     const dispatch  = useDispatch();
+
+    const expUpdatedata = useSelector( (state) => state.expense.expenseUpdateData)
 
 
 
@@ -16,8 +21,9 @@ const ExpenseItem   = (props)=> {
 
         dispatch(deleteExpense(expId))
 
-
     }
+
+    
 
 
     return(
@@ -30,7 +36,7 @@ const ExpenseItem   = (props)=> {
             <td> {expense.exp_date} </td>
             <td> {expense.exp_description} </td>
             <td>
-                <button className="btn btn-sm btn-primary my-3">Update</button>
+                <Link className="btn btn-sm btn-primary my-3" to={`/exepnse/update/${expense.id}`} >Update</Link>
                 <button className="btn btn-sm btn-danger" onClick={(e) => {expenseDeleteHandler(e,expense.id)}}>Delete</button>
 
             </td>
